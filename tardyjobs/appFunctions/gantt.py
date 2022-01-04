@@ -28,7 +28,7 @@ def ganttP1(tasks, P, D):
       gnt.broken_barh([(D[i-1], PC + P[i-1] - D[i-1])], ((i-1)*10, 3), facecolors = ('tab:red'))
     PC += P[i-1]
   fileName = rstr.xeger(r'[A-Z]\d[A-Z]\d[A-Z]\d') + ".png"
-  plt.savefig("/app/tardyjobs/files/results/" + fileName) 
+  plt.savefig("tardyjobs/files/results/" + fileName) 
   return fileName
 
 def ganttP2(tasks, P, D, H, B):
@@ -57,7 +57,7 @@ def ganttP2(tasks, P, D, H, B):
     PC += P[i-1]
   #gnt.text(x=P[2],y=3*10-5,s="Text",ha='center', va='center', color='black')
   fileName = rstr.xeger(r'[A-Z]\d[A-Z]\d[A-Z]\d') + ".png"
-  plt.savefig("/app/tardyjobs/files/results/" + fileName)
+  plt.savefig("tardyjobs/files/results/" + fileName)
   return fileName
 
 def main(tasks, P, D, H = [], B=[]):
