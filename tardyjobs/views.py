@@ -8,12 +8,12 @@ import pandas as pd
 import os
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
-from tardyJobs.appFunctions import dynamicP1
-from tardyJobs.appFunctions import dynamicP2
-from tardyJobs.appFunctions import amh as algmh
-from tardyJobs.appFunctions import gvnsP1
-from tardyJobs.appFunctions import gvnsP2
-from tardyJobs.appFunctions import gantt
+from tardyjobs.appFunctions import dynamicP1
+from tardyjobs.appFunctions import dynamicP2
+from tardyjobs.appFunctions import amh as algmh
+from tardyjobs.appFunctions import gvnsP1
+from tardyjobs.appFunctions import gvnsP2
+from tardyjobs.appFunctions import gantt
 import matplotlib
 import matplotlib.pyplot as plt
 matplotlib.use('Agg')
