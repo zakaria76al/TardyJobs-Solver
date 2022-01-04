@@ -23,7 +23,7 @@ def saveFile(dataFile, fileName):
 		#fileName = os.path.join(app.config['UPLOAD_FOLDER'], dataFile.filename.split('.')[0]+".txt")
 		dataFile.save(fileName)
 
-UPLOAD_FOLDER = "app/tardyjobs/files/uploads/"
+UPLOAD_FOLDER = "/app/tardyjobs/files/uploads/"
 
 
 app = Flask(__name__)
