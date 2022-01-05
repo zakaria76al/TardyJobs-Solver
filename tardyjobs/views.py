@@ -131,6 +131,11 @@ def amh():
 		if problem == "p1":
 			data = pd.read_csv(fileName, sep="\t", header=None)
 			A = data.values.tolist()
+			try:
+				P = A[1]
+				D = A[2]
+			except:
+				return render_template('solver.html', mtd='amh', errorProblem='true')
 			P = A[1]
 			D = A[2]
 			tasks = list(range(1, len(P) + 1))
