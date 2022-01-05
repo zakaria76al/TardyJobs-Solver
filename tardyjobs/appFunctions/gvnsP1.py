@@ -96,12 +96,14 @@ def first_improvement(x, P, D, l):
     return x
 
 l_max=2
-def VND(x, P, D, l_max):
+def VND(x, P, D, l_max, start_time, t):
     l = 1
     while l <= l_max:
         xp = shake(x, l) 
         xp = first_improvement(x, P, D, l) 
         x,l = change_neighborhood(x, P, D, xp, l)
+        if time.time() - start_time > t:
+              return x
     return x
 
 def GVNS(x, P, D, t=5, k_max=3, l_max=2):
@@ -111,7 +113,7 @@ def GVNS(x, P, D, t=5, k_max=3, l_max=2):
         k=1
         while k <= k_max:
             x1 = shake(x,k)  
-            x2 = VND(x1, P, D, l_max)
+            x2 = VND(x1, P, D, l_max, start_time, t)
             x, k = change_neighborhood(x, P, D, x2, k)
             if time.time() - start_time > t:
               return f(x, P, D), x

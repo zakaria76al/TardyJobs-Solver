@@ -13,14 +13,6 @@ def fP2(tasks, P, D, H, B):
       res += (D[i-1] - sum) * H[i-1]
   return res
 
-def swap1(x, lb, ub): #lb>0 
-    bound = len(x)
-    xc = None    
-    if (lb < bound and ub < bound):
-        xc = x.copy()
-        xc[lb], xc[ub] = xc[ub], xc[lb]
-    return xc
-
 def swap(l,i,j):
     tmp=l[i]
     l[i]=l[j]
@@ -105,12 +97,14 @@ def first_improvement(x, P, D, h, b, l):
     return x
 
 l_max=2
-def VND(x, P, D, h, b, l_max):
+def VND(x, P, D, h, b, l_max, start_time, t):
     l = 1
     while l <= l_max:
         xp = shake(x, l) 
         xp = first_improvement(x, P, D, h, b, l) 
         x, l = change_neighborhood(x, P, D, h, b, xp, l)
+        if time.time() - start_time > t:
+              return x
     return x
 
 def GVNS(x, P, D, h, b, t=5, k_max=3, l_max=2):
@@ -120,7 +114,7 @@ def GVNS(x, P, D, h, b, t=5, k_max=3, l_max=2):
         k=1
         while k <= k_max:
             x1 = shake(x, k)  
-            x2 = VND(x1, P, D, h, b, l_max)
+            x2 = VND(x1, P, D, h, b, l_max, start_time, t)
             x, k = change_neighborhood(x, P, D, h, b, x2, k)
             if time.time() - start_time > t:
               return fP2(x, P, D, h, b), x
