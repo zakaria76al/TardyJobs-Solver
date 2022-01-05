@@ -24,10 +24,6 @@ UPLOAD_FOLDER = "/app/tardyjobs/files/uploads/"
 def saveFile(dataFile, fileName):
 		dataFile.save(fileName)
 
-def nError(l, max):
-	if l > max:
-		return render_template('solver.html', mtd='dynamic', errorLen='true')
-
 app = Flask(__name__)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -57,7 +53,8 @@ def dynamic():
 				D = A[2]
 			except:
 				return render_template('solver.html', mtd='dynamic', errorProblem='true')
-			nError(len(P),15)
+			if len(P) > 15:
+				return render_template('solver.html', mtd='dynamic', errorLen='true')
 			tasks = list(range(1, len(P) + 1))
 			coutRes, tasksRes = dynamicP1.f(tasks,P,D)
 			imgName = gantt.ganttP1(tasksRes, P, D)
@@ -71,7 +68,8 @@ def dynamic():
 				B = A[4]
 			except:
 				return render_template('solver.html', mtd='dynamic', errorProblem='true')
-			nError(len(P),15)
+			if len(P) > 15:
+				return render_template('solver.html', mtd='dynamic', errorLen='true')
 			tasks = list(range(1, len(P) + 1))
 			coutRes, tasksRes = dynamicP2.f(tasks,P,D,H,B)
 			imgName = gantt.ganttP2(tasksRes, P, D, H, B)
