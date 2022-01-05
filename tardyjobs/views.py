@@ -19,12 +19,14 @@ import matplotlib.pyplot as plt
 matplotlib.use('Agg')
 import rstr
 
-def saveFile(dataFile, fileName):
-		#fileName = os.path.join(app.config['UPLOAD_FOLDER'], dataFile.filename.split('.')[0]+".txt")
-		dataFile.save(fileName)
-
 UPLOAD_FOLDER = "/app/tardyjobs/files/uploads/"
 
+def saveFile(dataFile, fileName):
+		dataFile.save(fileName)
+
+def nError(l, max):
+	if l > max:
+		return render_template('solver.html', mtd='dynamic', errorLen='true')
 
 app = Flask(__name__)
 
@@ -50,18 +52,26 @@ def dynamic():
 		if problem == "p1":
 			data = pd.read_csv(fileName, sep="\t", header=None)
 			A = data.values.tolist()
-			P = A[1]
-			D = A[2]
+			try:
+				P = A[1]
+				D = A[2]
+			except:
+				return render_template('solver.html', mtd='dynamic', errorProblem='true')
+			nError(len(P),15)
 			tasks = list(range(1, len(P) + 1))
 			coutRes, tasksRes = dynamicP1.f(tasks,P,D)
 			imgName = gantt.ganttP1(tasksRes, P, D)
 		elif problem == "p2":
 			data = pd.read_csv(fileName, sep="\t", header=None)
 			A = data.values.tolist()
-			P = A[1]
-			D = A[2]
-			H = A[3]
-			B = A[4]
+			try:
+				P = A[1]
+				D = A[2]
+				H = A[3]
+				B = A[4]
+			except:
+				return render_template('solver.html', mtd='dynamic', errorProblem='true')
+			nError(len(P),15)
 			tasks = list(range(1, len(P) + 1))
 			coutRes, tasksRes = dynamicP2.f(tasks,P,D,H,B)
 			imgName = gantt.ganttP2(tasksRes, P, D, H, B)
@@ -82,22 +92,28 @@ def gvns():
 		if problem == "p1":
 			data = pd.read_csv(fileName, sep="\t", header=None)
 			A = data.values.tolist()
-			P = A[1]
-			D = A[2]
+			try:
+				P = A[1]
+				D = A[2]
+			except:
+				return render_template('solver.html', mtd='gvns', errorProblem='true')
 			tasks = list(range(1, len(P) + 1))
-			coutRes, tasksRes = gvnsP1.GVNS(tasks,P,D)
+			coutRes, tasksRes = gvnsP1.GVNS(tasks,P,D,t=4)
 			print("\n\n")
 			print(tasksRes)
 			imgName = gantt.ganttP1(tasksRes, P, D)
 		elif problem == "p2":
 			data = pd.read_csv(fileName, sep="\t", header=None)
 			A = data.values.tolist()
-			P = A[1]
-			D = A[2]
-			H = A[3]
-			B = A[4]
+			try:
+				P = A[1]
+				D = A[2]
+				H = A[3]
+				B = A[4]
+			except:
+				return render_template('solver.html', mtd='gvns', errorProblem='true')
 			tasks = list(range(1, len(P) + 1))
-			coutRes, tasksRes = gvnsP2.GVNS(tasks,P,D,H,B)
+			coutRes, tasksRes = gvnsP2.GVNS(tasks,P,D,H,B,t=4)
 			imgName = gantt.ganttP2(tasksRes, P, D, H, B)
 		return render_template('results.html', resultat=tasksRes , P=P, cout=coutRes, gantt=imgName)
 	else:
@@ -121,15 +137,9 @@ def amh():
 			coutRes, tasksRes = algmh.amhSolver(tasks,P,D)
 			imgName = gantt.ganttP1(tasksRes, P, D)
 		else:
-			return render_template('solver.html', mtd='amh', error='true')
+			return render_template('solver.html', mtd='amh', errorAMH='true')
 
 		return render_template('results.html', resultat=tasksRes , P=P, cout=coutRes, gantt=imgName)
 	else:
 		return render_template('solver.html', mtd='amh')
 
-@app.route('/upload', methods=['get','post'])
-def upload():
-	if request.method == 'POST':
-		return render_template('upload.html')
-	else:
-		return render_template('solver.html')

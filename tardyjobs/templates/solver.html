@@ -43,6 +43,34 @@
     </div>
     <!-- end of preloader -->
     
+    {% block content %}
+        {% if errorAMH=='true' %}
+            <div class="alert alert-warning alert-dismissible" role="alert" style="position: absolute;">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="alert-heading">AMH algo is not for problem 2</h4>
+                To solve problem 2 use Dynamic programming or GVNS
+            </div>
+        {% elif errorLen=='true' %}
+            <div class="alert alert-warning alert-dismissible" role="alert" style="position: absolute;">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="alert-heading">Dynamic programming can solve problems with N less than 15</h4>
+                To solve this problem use GVNS
+            </div>
+        {% elif errorProblem=='true' %}
+            <div class="alert alert-warning alert-dismissible" role="alert" style="position: absolute;">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="alert-heading">Something is wrong in file selected</h4>
+                Try again
+            </div>
+        {% endif %}
+    {% endblock content %}
+            
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
