@@ -60,6 +60,13 @@
                 <h5 class="alert-heading">Dynamic programming can solve problems with N less than 15</h5>
                 To solve this problem use GVNS
             </div>
+        {% elif file=='noFile' %}
+            <div class="alert alert-info alert-dismissible" role="alert" style="position: fixed;top: 100px;z-index: 9999;">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h5 class="alert-heading">Please select a file</h5>
+            </div>
         {% elif errorProblem=='true' %}
             <div class="alert alert-warning alert-dismissible" role="alert" style="position: fixed;top: 100px;z-index: 9999;">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">

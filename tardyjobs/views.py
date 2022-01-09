@@ -145,4 +145,3 @@ def amh():
 		return render_template('results.html', resultat=tasksRes , P=P, cout=coutRes, gantt=imgName)
 	else:
 		return render_template('solver.html', mtd='amh')
-
