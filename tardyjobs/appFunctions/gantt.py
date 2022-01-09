@@ -6,8 +6,8 @@ import rstr
 def ganttP1(tasks, P, D):
   tasks = [int(i) for i in tasks]
   fig, gnt = plt.subplots()
-  #fig.figsize=(10, 20)
-  fig.dpi=300
+  fig.figsize=(100, 200)
+  fig.dpi=900
   gnt.set_ylim(0, len(tasks)) 
   gnt.set_xlim(0, sum(P)+10) 
   gnt.set_xlabel('Prossecing Time')
