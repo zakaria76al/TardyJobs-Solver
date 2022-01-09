@@ -11,14 +11,6 @@ def f(tasks, P, D):
       count += 1
   return count
 
-def swap1(x, lb, ub): #lb>0 
-    bound = len(x)
-    xc = None    
-    if (lb < bound and ub < bound):
-        xc = x.copy()
-        xc[lb], xc[ub] = xc[ub], xc[lb]
-    return xc
-
 def swap(l,i,j):
     tmp=l[i]
     l[i]=l[j]

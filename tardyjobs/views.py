@@ -41,7 +41,7 @@ def dynamic():
 	if request.method == 'POST':
 		dataFile = request.files['dataFile']
 		if(dataFile.filename == ''):
-			return render_template('solver.html?file=noFile')
+			return render_template('solver.html',file='noFile')
 		fileName = os.path.join(app.config['UPLOAD_FOLDER'], dataFile.filename)
 		saveFile(dataFile, fileName)
 		problem = request.form['problem']
@@ -83,7 +83,7 @@ def gvns():
 	if request.method == 'POST':
 		dataFile = request.files['dataFile']
 		if(dataFile.filename == ''):
-			return render_template('solver.html?file=noFile')
+			return render_template('solver.html',file='noFile')
 		fileName = os.path.join(app.config['UPLOAD_FOLDER'], dataFile.filename)
 		saveFile(dataFile, fileName)
 		problem = request.form['problem']
@@ -122,7 +122,7 @@ def amh():
 	if request.method == 'POST':
 		dataFile = request.files['dataFile']
 		if(dataFile.filename == ''):
-			return render_template('solver.html?file=noFile')
+			return render_template('solver.html',file='noFile')
 		fileName = os.path.join(app.config['UPLOAD_FOLDER'], dataFile.filename)
 		saveFile(dataFile, fileName)
 		problem = request.form['problem']
